@@ -1,0 +1,2 @@
+helm install --namespace monitoring redis-cluster bitnami/redis-cluster -f /home/modi/devops-experts/monitoring-demo/monitoring/k8s-setup/redis/values.yaml
+Add new dashboard - https://grafana.com/grafana/dashboards/9338
