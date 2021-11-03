@@ -1,0 +1,5 @@
+docker build -t moditamam/1208:latest monitoring/docker-compose/flask/
+docker push moditamam/1208:latest
+
+kubectl apply -n monitoring -f monitoring/docker-compose/flask/deployment.yaml
+kubectl apply -n monitoring -f monitoring/docker-compose/flask/deploy-service.yaml

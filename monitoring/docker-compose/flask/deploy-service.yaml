@@ -6,12 +6,9 @@ metadata:
     app: flask
 spec:
   ports:
-  - port: 8080
+  - port: 5000
     protocol: TCP
     name: flask
-  - port: 5099
-    protocol: TCP
-    name: metrics
   selector:
     app: flask
   type: NodePort

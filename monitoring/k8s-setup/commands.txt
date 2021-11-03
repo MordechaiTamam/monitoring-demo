@@ -1,17 +1,25 @@
-1. kubectl apply -f monitoring/k8s-setup/monitoring/namespace.yml
-2. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-3. helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics
+1. helm repo add bitnami https://charts.bitnami.com/bitnami
+2. kubectl apply -f monitoring/k8s-setup/monitoring/namespace.yml
+3. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 4. helm upgrade -i prometheus prometheus-community/prometheus --namespace monitoring -f monitoring/k8s-setup/prometheus/values.yml
 
-10. kubectl -n monitoring port-forward svc/prometheus-node-exporter 9100:9100 &
-11. kubectl -n monitoring port-forward svc/prometheus-pushgateway 9091:9091 &
-12. kubectl -n monitoring port-forward svc/prometheus-server 9092:80 &
-13. kubectl -n monitoring port-forward svc/prometheus-alertmanager 9090:80
-13: Sending metrics to pushgateway: echo "some_metric 52" | curl --data-binary @- http://localhost:9091/metrics/job/some_job/a/b
+5. kubectl -n monitoring port-forward svc/prometheus-node-exporter 9100:9100 & > /dev/null
+6. kubectl -n monitoring port-forward svc/prometheus-pushgateway 9091:9091 & > /dev/null
+7. kubectl -n monitoring port-forward svc/prometheus-server 9092:80 & > /dev/null
+8. kubectl -n monitoring port-forward svc/prometheus-alertmanager 9090:80 & > /dev/null
+9: Sending metrics to pushgateway: echo "some_metric 52" | curl --data-binary @- http://localhost:9091/metrics/job/some_job/a/b
 
 Grafana:
-5. kubectl apply -f monitoring/k8s-setup/monitoring/grafana/config.yml
-6. helm repo add grafana https://grafana.github.io/helm-charts
-7. helm install grafana --namespace monitoring grafana/grafana
-8. kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-9. kubectl -n monitoring port-forward svc/grafana 3000:80 &
+10. kubectl apply -f monitoring/k8s-setup/monitoring/grafana/config.yml
+11. helm repo add grafana https://grafana.github.io/helm-charts
+12. helm install grafana --namespace monitoring grafana/grafana
+13. kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+14. kubectl -n monitoring port-forward svc/grafana 3000:80 & > /dev/null
+    1. Once connected to Grafana: Add data source -> Prometheus -> http://prometheus-server
+    2. Go to Dashboards -> Manage ->
+        Exporter dashboard: import - 1860 (documentation at https://grafana.com/grafana/dashboards/1860)
+        Kube-metrics dashboard: import - 1332 (documentation at https://grafana.com/grafana/dashboards/1332)
+
+Deploy our own Flask application:
+1) Commands can be found at monitoring/docker-compose/flask/commands.txt
+2) Grafana Flask dashboard: 9688 - https://grafana.com/grafana/dashboards/9688

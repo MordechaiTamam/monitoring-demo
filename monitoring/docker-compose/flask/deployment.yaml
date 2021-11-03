@@ -22,12 +22,11 @@ spec:
         app: flask
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '5099'
+        prometheus.io/port: '5000'
     spec:
       containers:
       - name: flask
         image: moditamam/1208:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
-        - containerPort: 5099
+        - containerPort: 5000
