@@ -6,7 +6,7 @@ services:
       context: ./flask
     restart: unless-stopped
     container_name: flask-api
-    image: example-flask-api
+    image: flask-api
     ports:
       - "5000:5000"
     networks:

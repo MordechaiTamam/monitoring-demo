@@ -1,5 +1,5 @@
 import requests
 
-for i in range(0, 100):
+for i in range(0, 10000):
     print(i)
-    requests.get("http://localhost:5000/flask-prometheus-grafana-example/")
+    requests.get("http://localhost:5000/")

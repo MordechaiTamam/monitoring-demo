@@ -23,5 +23,5 @@ def say_hello():
     return {"message": "hello"}
 
 
-if __name__ == "__main__":
-    api.run()
+# if __name__ == "__main__":
+#     api.run()
