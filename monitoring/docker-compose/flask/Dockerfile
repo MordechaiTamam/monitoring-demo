@@ -2,7 +2,7 @@
 # Use an official Python runtime as a parent image
 FROM python:3.8-slim
 RUN apt-get update && apt-get install -y procps less wget
-RUN pip install flask requests prometheus-flask-exporter
+RUN pip install flask requests prometheus-flask-exporter psutil cpu-load-generator
 
 # Set the working directory to /app
 WORKDIR /app

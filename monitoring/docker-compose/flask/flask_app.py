@@ -1,4 +1,5 @@
 import logging
+import threading
 
 from flask import Flask
 from flask import jsonify
@@ -13,13 +14,14 @@ metrics = PrometheusMetrics(api)
 metrics.info("app_info", "App Info, this can be anything you want", version="1.0.0")
 
 
-@api.route("/flask-prometheus-grafana-example/")
+@api.route("/")
 def hello():
     return jsonify(say_hello())
 
 
 def say_hello():
     return {"message": "hello"}
+
 
 if __name__ == "__main__":
     api.run()
