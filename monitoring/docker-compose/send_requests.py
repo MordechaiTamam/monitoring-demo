@@ -1,5 +1,27 @@
+import time
+import random
+import threading
+
 import requests
 
-for i in range(0, 10000):
-    print(i)
-    requests.get("http://localhost:5000/")
+endpoints = ('one', 'two', 'three', 'four', 'error')
+
+
+def run():
+    while True:
+        try:
+            target = random.choice(endpoints)
+            requests.get("http://localhost:5000/%s" % target, timeout=1)
+
+        except BaseException as ex:
+            print(ex)
+
+
+if __name__ == '__main__':
+    for _ in range(4):
+        thread = threading.Thread(target=run)
+        thread.daemon = True
+        thread.start()
+
+    while True:
+        time.sleep(1)
