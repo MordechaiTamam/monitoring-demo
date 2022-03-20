@@ -1,6 +1,3 @@
-// 20220127141658
-// https://raw.githubusercontent.com/rycus86/prometheus_flask_exporter/master/examples/sample-signals/grafana/dashboards/example.json
-
 {
   "annotations": {
     "list": [
